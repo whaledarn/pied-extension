@@ -20,7 +20,8 @@
            "48": "logos/48.png",
           "128": "logos/128.png" },
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ]
 
 }

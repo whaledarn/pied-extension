@@ -4,22 +4,38 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Karla:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <link rel="stylesheet" href="css/popout.css">
 
 
+
 </head>
 
 <body style="height: 550px">
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="logos/pied logo.svg" width="30" height="30" class="d-inline-block align-top name" alt="">
+      pied.
+    </a>
+  </nav>
   <div class="homepage">
-    <div style="width:300px; text-align: center; ">
-      <h1 class="title">pied.</h1>
-      <div class="slidecontainer">
-        <h2 id="demo">50</h2>
-        <input type="range" min="0" max="6" value="3" step="1" class="slider" id="myRange">
+    <div class="home-top">
+      <div class="slidecontainer row">
+        <div class="col-2">
+          <h5 id="demo">50</h5>
+        </div>
+        <div class="col-7">
+          <input type="range" min="0" max="6" value="3" step="1" class="slider" id="myRange">
+
+        </div>
+        <div class="col-3">
+          <button id="btn" class="w-40 btn btn-sm btn-primary" type="button">start</button>
+        </div>
       </div>
-      <button id="btn" class="w-50 btn btn-lg btn-primary" type="button">start</button>
       <h1 id="timer"></h1>
 
     </div>
@@ -36,6 +52,8 @@
       </div>
     </div>
 
+
+
     <div class="row options">
       <div class="col sm-6">
         <button id="web" type="button" class="btn btn-outline-primary">Add website</button>
@@ -51,9 +69,14 @@
   <div class="sitepage">
 
     <div style="width:300px; text-align: center; ">
-      <h1 class="title">pied.</h1>
       <div class="slidecontainer">
-        <input id="website-entry" class="form-control form-control-sm" type="text" placeholder="www.google.com">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">www.example.com</span>
+          </div>
+          <input id="website-entry" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <!-- <input id="website-entry" class="form-control form-control-sm" type="text" placeholder="www.google.com"> -->
       </div>
       <button id="submit" class="w-50 btn btn-sm btn-primary" type="button">Add site</button>
       <h1 id="timer"></h1>
