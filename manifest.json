@@ -8,16 +8,16 @@
   "content_scripts":[
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["javascript/content.js"]
     }
   ],
   "background": {
     "persistent": true,
-    "scripts": ["background.js"]
+    "scripts": ["javascript/background.js"]
   },
   "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
-  "icons": { "16": "16.png",
-           "48": "48.png",
-          "128": "128.png" }
+  "icons": { "16": "logos/16.png",
+           "48": "logos/48.png",
+          "128": "logos/128.png" }
 
 }
