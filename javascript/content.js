@@ -86,7 +86,7 @@ const generateCSS = () => {
 chrome.runtime.onMessage.addListener(gotMessage);
 
 function gotMessage(request, sender, response) {
-  if(blocked.includes(window.location.hostname)){
+if(blocked.includes(window.location.hostname)){
     document.body.innerHTML = generateHTML();
     document.head.innerHTML = generateCSS();
   }
