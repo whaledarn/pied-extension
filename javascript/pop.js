@@ -37,7 +37,8 @@ GLOB_SET_BTN.addEventListener('click', () => {
 
 web_button.addEventListener('click', () => {
   alert("worked");
-  chrome.browserAction.setPopup({popup: "sites.html"});
+  document.querySelector(".homepage").style.display = "none";
+  document.querySelector(".sitepage").style.display = "inline";
 
 })
 
