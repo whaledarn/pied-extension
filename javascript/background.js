@@ -26,6 +26,15 @@ class Timer {
     return this.IS_DONE;
   }
   startTimer() {
+    // chrome.tabs.query({
+    //   active: true,
+    //   currentWindow: true
+    // }, function(tabs) {
+    //   chrome.tabs.sendMessage(tabs[0].id, {
+    //     greeting: "block"
+    //   }, function(response) {
+    //   });
+    // });
     this.CUR_DURATION = this.DURATION;
     this.IS_RUNNING = true;
 
@@ -37,18 +46,18 @@ class Timer {
     if (this.IS_DONE != true) {
       if (this.CUR_DURATION > 0) {
         this.decrementTime();
-        chrome.tabs.query({
-          active: true,
-          currentWindow: true
-        }, function(tabs) {
-          chrome.tabs.sendMessage(tabs[0].id, {
-            greeting: "hello"
-          }, function(response) {
-          });
-        });
 
       } else {
         this.IS_DONE = true;
+        // chrome.tabs.query({
+        //   active: true,
+        //   currentWindow: true
+        // }, function(tabs) {
+        //   chrome.tabs.sendMessage(tabs[0].id, {
+        //     greeting: "unblock"
+        //   }, function(response) {
+        //   });
+        // });
         alert("FINISHED!");
         resetAll();
       }
@@ -83,6 +92,16 @@ function resetAll() {
 }
 
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    if (request.greeting === "hello"){
+      sendResponse({farewell: timer01.IS_RUNNING});
+    }
+  }
+);
 
 var timer01 = new Timer();
 

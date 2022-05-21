@@ -70,6 +70,7 @@ function IntervalUpdate() {
 }
 
 function resetAll() {
+
   document.getElementById('timer').innerText = "00";
   GLOB_BG.resetAll();
 }

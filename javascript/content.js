@@ -1,5 +1,5 @@
 blocked = ["www.facebook.com", "www.youtube.com"];
-
+var shouldBlock = false;
 // if(blocked.includes(window.location.hostname)){
 //   document.body.innerHTML = "<button> PENIS <\button>";
 // }
@@ -82,12 +82,25 @@ const generateCSS = () => {
   `;
 }
 
-
-chrome.runtime.onMessage.addListener(gotMessage);
-
-function gotMessage(request, sender, response) {
-if(blocked.includes(window.location.hostname)){
-    document.body.innerHTML = generateHTML();
-    document.head.innerHTML = generateCSS();
+chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+  shouldBlock = response.farewell;
+  if(shouldBlock){
+    if(blocked.includes(window.location.hostname)){
+        document.body.innerHTML = generateHTML();
+        document.head.innerHTML = generateCSS();
+      }
   }
-}
+
+});
+
+// chrome.runtime.onMessage.addListener(gotMessage);
+//
+// function gotMessage(request, sender, response) {
+//   alert("here");
+//   if(request.greeting == "block")
+//     shouldBlock = true;
+//   if (request.greeting === "unblock")
+//     shouldBlock = false;
+// }
+
+// alert(shouldBlock);
