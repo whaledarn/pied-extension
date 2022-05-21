@@ -64,7 +64,7 @@ function IntervalUpdate() {
   if(GLOB_BG.timer01.IS_RUNNING)
     document.getElementById('timer').innerText = convertTime(GLOB_BG.timer01.CUR_DURATION);
   else{
-    document.getElementById('timer').innerText = "";
+    document.getElementById('timer').innerText = "00:00:00";
   }
 
 }
