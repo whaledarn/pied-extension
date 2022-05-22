@@ -1,3 +1,4 @@
+COLOR_VALUE = Math.floor(Math.random()*5);
 class Timer {
   constructor() {
     this.DURATION = 60;
@@ -35,8 +36,11 @@ class Timer {
     //   }, function(response) {
     //   });
     // });
+
     this.CUR_DURATION = this.DURATION;
     this.IS_RUNNING = true;
+    // COLOR_VALUE = 2;
+    // alert("changed color to ");
 
     this.TIMING_INTERVAL = setInterval(this.intervalCheck.bind(this), 1000)
   }
@@ -87,6 +91,7 @@ class Timer {
 }
 
 function resetAll() {
+  COLOR_VALUE = Math.floor(Math.random()*5);
   timer01.clear();
   timer01 = new Timer();
 }

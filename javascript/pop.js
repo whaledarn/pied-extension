@@ -14,6 +14,8 @@ var values = [1,1800, 3600, 5400, 7200, 10800, 14400, 18000];
 var text = ["1sec","30min", "60min", "90min", "2hr", "3hr", "4hr", "5hr"];
 output.innerHTML = "2hr"; // Display the default slider value
 
+
+ball.style.backgroundColor = colors[GLOB_BG.COLOR_VALUE];
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
   output.innerHTML = text[this.value];
@@ -24,8 +26,8 @@ GLOB_SET_BTN.addEventListener('click', () => {
   resetAll();
   // get the durations of each timer
   var timer01_dur = values[slider.value];
-  var colorValue = Math.floor(Math.random()*5);
-  ball.style.backgroundColor = colors[colorValue];
+  // alert(GLOB_BG.COLOR_VALUE);
+  ball.style.backgroundColor = colors[GLOB_BG.COLOR_VALUE];
 
 
   GLOB_BG.timer01.setStartTime(timer01_dur);
