@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500&display=swap');
+
+body{
+  font-family: 'Baloo Da 2', "Verdana", sans-serif;
+}
+
 #timer {
   margin-top: 15px;
   margin-bottom: 15px;
   text-align: center;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 #btn-start{
@@ -20,11 +25,10 @@
 
 .navbar{
   margin-bottom:20px;
+
 }
 .name {
-  font-family: 'Grape Nuts', cursive;
-  /* font-family: 'Karla', sans-serif; */
-  /* font-family: "fantasy"; */
+  margin-left:5px;
 }
 
 .hometop {
