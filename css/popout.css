@@ -2,13 +2,25 @@
   margin-top: 15px;
   margin-bottom: 15px;
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
-#demo {
-  font-size: 100%;
-  text-align: center;
+#btn-start{
+  margin: auto;
 }
 
+#btn-restart{
+  margin: auto;
+}
+
+.custom-button {
+    width: 120px !important;
+}
+
+
+.navbar{
+  margin-bottom:20px;
+}
 .name {
   font-family: 'Grape Nuts', cursive;
   /* font-family: 'Karla', sans-serif; */
@@ -19,6 +31,13 @@
   width: 250px;
   /* margin: auto; */
   text-align: center;
+}
+
+.unstarted{
+  display: none;
+}
+
+.started{
 }
 
 .title {
@@ -68,6 +87,7 @@
   border-radius: 50%;
   background: #04AA6D;
   cursor: pointer;
+
 }
 
 .slider::-moz-range-thumb {

@@ -52,6 +52,7 @@ class Timer {
         this.decrementTime();
 
       } else {
+        COLOR_VALUE = Math.floor(Math.random()*5);
         this.IS_DONE = true;
         // chrome.tabs.query({
         //   active: true,
@@ -91,8 +92,7 @@ class Timer {
 }
 
 function resetAll() {
-  COLOR_VALUE = Math.floor(Math.random()*5);
-  timer01.clear();
+    timer01.clear();
   timer01 = new Timer();
 }
 
