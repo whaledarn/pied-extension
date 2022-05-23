@@ -109,7 +109,7 @@ body{
   height: 250px;
   width: 300px;
   /* position: absolute; */
-  padding-top: 20px;
+  padding-top: 5px;
   margin: auto;
   left: 0;
   right: 0;
@@ -131,7 +131,19 @@ body{
   left: 40%;
   bottom: 50%;
   z-index: 1;
-  animation: bounce 0.9s infinite;
+  /* animation: bounce 1s infinite; */
+}
+
+.color-id {
+  /* position: relative; */
+  /* top: 150px; */
+  /* left: 0px; */
+  text-align: right;
+  margin: auto;
+  /* margin-top:20px; */
+  margin-right:10px;
+  text-shadow: 2px 2px 4px #000000;
+
 }
 
 .shadow{
@@ -144,7 +156,7 @@ body{
   top: 150px;
   left: 103px;
   z-index: 0.5;
-  animation: shrink 0.9s infinite;
+  /* animation: shrink 1s infinite; */
 }
 
 @keyframes bounce {

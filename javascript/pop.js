@@ -13,7 +13,7 @@ var ball = document.querySelector(".ball");
 
 var colors = ["#FFFFFF", "#000000", "#FF0000", "#FFFF00", "#0000FF"]
 var values = [1, 1800, 3600, 5400, 7200, 10800, 14400, 18000];
-var text = ["00:00:01", "00:30:00", "01:00:00", "01:30:00", "02:00:00", "03:00:00", "04:00:00", "05:00:00"];
+var text = ["00h 00m 01s", "00h 30m 00s", "01h 00m 00s", "01h 30m 00s", "02h 00m 00s", "03h 00m 00s", "04h 00m 00s", "05h 00m 00s"];
 
 
 if (GLOB_BG.timer01.IS_RUNNING) {
@@ -22,6 +22,8 @@ if (GLOB_BG.timer01.IS_RUNNING) {
 
 
 ball.style.backgroundColor = colors[GLOB_BG.COLOR_VALUE];
+document.querySelector(".color-id").innerHTML = colors[GLOB_BG.COLOR_VALUE];
+document.querySelector(".color-id").style.color = colors[GLOB_BG.COLOR_VALUE];
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
   timer_value.innerHTML = text[this.value];
@@ -66,13 +68,15 @@ function convertTime(aDur) {
   var format_min = min < 10 ? "0" + min : min;
   var format_sec = sec < 10 ? "0" + sec : sec;
 
-  return format_hour + ":" + format_min + ":" + format_sec;
+  return format_hour + "h " + format_min + "m " + format_sec+"s";
 
 }
 
 function doWhileRunning() {
   document.querySelector(".started").style.display = "none";
   document.querySelector(".unstarted").style.display = "flex";
+  document.querySelector(".ball").style.animation = "bounce 1s infinite";
+  document.querySelector(".shadow").style.animation = "shrink 1s infinite";
 }
 
 function IntervalUpdate() {
@@ -86,13 +90,17 @@ function IntervalUpdate() {
     ball.style.backgroundColor = colors[GLOB_BG.COLOR_VALUE];
     document.querySelector(".started").style.display = "flex";
     document.querySelector(".unstarted").style.display = "none";
+    document.querySelector(".ball").style.animation = "";
+    document.querySelector(".shadow").style.animation = "";
+    document.querySelector(".color-id").innerHTML = colors[GLOB_BG.COLOR_VALUE];
+    document.querySelector(".color-id").style.color = colors[GLOB_BG.COLOR_VALUE];
   }
 
 }
 
 function resetAll() {
 
-  document.getElementById('timer').innerText = "00:00:00";
+  document.getElementById('timer').innerText = "00h 00m 00s";
   GLOB_BG.resetAll();
 }
 

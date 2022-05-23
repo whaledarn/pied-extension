@@ -1,8 +1,8 @@
-blocked = ["www.facebook.com", "www.youtube.com"];
+blocked = ["www.facebook.com", "www.youtube.com", "www.discord.com"];
 var shouldBlock = false;
-// if(blocked.includes(window.location.hostname)){
-//   document.body.innerHTML = "<button> PENIS <\button>";
-// }
+//http://www.google.com/s2/favicons?domain=discord.com
+
+
 const generateHTML = () => {
   return `
   <div class="container">
@@ -40,7 +40,7 @@ const generateCSS = () => {
     background: black;
     display: inline-flex;
     border-radius: 2em;
-    animation: PopUp .9s ease-in infinite;
+    animation: PopUp 1s ease-in infinite;
   }
 
   .circle:nth-child(1){
