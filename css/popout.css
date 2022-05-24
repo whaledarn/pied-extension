@@ -22,6 +22,9 @@ body{
     width: 120px !important;
 }
 
+.website-name{
+  font-size: 22px;
+}
 
 .navbar{
   margin-bottom:20px;

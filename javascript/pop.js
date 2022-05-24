@@ -84,6 +84,15 @@ function getURL(){
       var url = changeUrl(tabs[0].url);
       var image = "<img style='max-width:15%; margin-right:5px;' src='https://icon.horse/icon/" + url + "'>";
       document.querySelector(".website-name").innerHTML = image + url;
+      if(url.length > 20){
+        document.querySelector(".website-name").style.fontSize = "18px";
+      }
+      if(url.length > 40){
+        document.querySelector(".website-name").style.fontSize = "10px";
+      }
+      // document.querySelector(".website-name").style.maxWidth = "300px";
+      // document.querySelector(".website-name").style.display = "block";
+      // document.querySelector(".website-name").style.width = "100%";
       // alert("the tab is " + url);
   })
 
@@ -134,10 +143,17 @@ function reloadWebsites(){
       var image = document.createElement("img");
       var image = "<img style='max-width:10%; margin-right:5px;' src='https://icon.horse/icon/" + result["urls"][i] + "'>";
 
-      var website_text = document.createElement("a");
+      let website_text = document.createElement("a");
       website_text.classList.add("list-group-item");
       website_text.classList.add("list-group-item-action");
       website_text.innerHTML = image + result["urls"][i];
+      website_text.onclick = function() {
+        alert(website_text.innerText);
+        removeUrl(website_text.innerText);
+        chrome.tabs.reload();
+      }
+      // website_text.style.maxWidth = "300px";
+
       // alert(website_text.innerText);
       // website_text.addEventListener("click", function() {
       //   removeUrl(website_text.innerText);
@@ -149,19 +165,27 @@ function reloadWebsites(){
       // list.appendChild(button);
     }
     // alert("wtf " + button.innerText);
-    for(var i = 1; i<=result["urls"].length; i++){
-      var button = document.querySelector('.blocked-sites :nth-child('+i+')');
+    // for(var i = 1; i<=result["urls"].length; i++){
+    //   var button = document.querySelector('.blocked-sites :nth-child('+i+')');
+    //
+    //   button.onclick = function() {
+    //     alert(button.innerText);
+    //     removeUrl(button.innerText);
+    //     chrome.tabs.reload();
+    //   }
       // button.addEventListener("mouseover", function() {
       //   button.classList.add("list-group-item-danger");
       // });
       // button.addEventListener("mouseleave", function() {
       //   button.classList.remove("list-group-item-danger");
       // });
-      button.addEventListener("click", function() {
-        removeUrl(button.innerText);
-        chrome.tabs.reload();
-      });
-    }
+
+      // button.addEventListener("click", function() {
+      //   alert(button.innerText);
+      //   removeUrl(button.innerText);
+      //   chrome.tabs.reload();
+      // });
+    // }
   })
 }
 
