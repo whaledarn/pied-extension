@@ -100,10 +100,15 @@ function reloadWebsites(){
       list.appendChild(website_text);
       // list.appendChild(button);
     }
-    var button = document.querySelector('.blocked-sites :nth-child(1)');
     // alert("wtf " + button.innerText);
     for(var i = 1; i<=result["urls"].length; i++){
       var button = document.querySelector('.blocked-sites :nth-child('+i+')');
+      // button.addEventListener("mouseover", function() {
+      //   button.classList.add("list-group-item-danger");
+      // });
+      // button.addEventListener("mouseleave", function() {
+      //   button.classList.remove("list-group-item-danger");
+      // });
       button.addEventListener("click", function() {
         removeUrl(button.innerText);
         chrome.tabs.reload();

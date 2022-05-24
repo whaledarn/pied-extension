@@ -1,12 +1,7 @@
-var blocked;
+// var blocked;
 var shouldBlock = false;
 //http://www.google.com/s2/favicons?domain=discord.com
-chrome.storage.sync.get(["urls"], function(result) {
-    if(result["urls"] == null)
-      blocked = [];
-    else
-      blocked = result["urls"];
-})
+
 
 const generateHTML = () => {
   return `
@@ -98,19 +93,33 @@ const generateCSS = () => {
 //   }
 // );
 
-chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+chrome.runtime.sendMessage({
+  greeting: "hello"
+}, function(response) {
   shouldBlock = response.farewell;
-  if(shouldBlock){
-    // alert(blocked);
-    // alert(window.location.host);
+  // alert(shouldBlock);
 
-    if(blocked.includes(window.location.host)){
+  chrome.storage.sync.get(["urls"], function(result) {
+    // alert("getting urls");
+    if (result["urls"] == null)
+      var blocked = [];
+    else
+      var blocked = result["urls"];
+
+    if (shouldBlock) {
+      // alert(blocked);
+      // alert(window.location.host);
+
+      if (blocked.includes(window.location.host)) {
         document.body.innerHTML = generateHTML();
         document.head.innerHTML = generateCSS();
       }
-  }
+    }
+  })
 
 });
+
+
 
 // chrome.runtime.onMessage.addListener(gotMessage);
 //
