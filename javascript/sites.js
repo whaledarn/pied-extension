@@ -5,6 +5,7 @@ var submit = document.getElementById('submit');
 var list = document.querySelector(".blocked-sites");
 
 
+
 submit.addEventListener('click', () => {
 
   // alert("adding website " + website.value);
@@ -21,7 +22,7 @@ submit.addEventListener('click', () => {
       // alert(url_to_add);
 
       newUrl = changeUrl(tabs[0].url);
-      if (!result["urls"].includes(newUrl))
+      if (newUrl != null && !result["urls"].includes(newUrl))
         result["urls"].push(newUrl);
 
       chrome.storage.sync.set({
@@ -36,22 +37,7 @@ submit.addEventListener('click', () => {
 })
 
 
-function changeUrl(url) {
 
-
-  try {
-    const paramUrl = new URL(url);
-    var newUrl = paramUrl.host;
-    // newUrl = "*" + newUrl.substring(newUrl.indexOf(":")) + "*"
-    return newUrl
-  } catch (e) {
-    console.error(e);
-    alert("Bad URL");
-    return;
-  }
-
-
-}
 
 
 

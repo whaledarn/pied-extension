@@ -4,6 +4,7 @@ var GLOB_BG = chrome.extension.getBackgroundPage();
 var GLOB_SET_BTN = document.getElementById('btn-start');
 var web_button = document.getElementById('web');
 var color_button = document.getElementById('colors');
+var reset_websites = document.getElementById("reset-websites");
 
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
@@ -11,6 +12,7 @@ var timer_value = document.getElementById("timer");
 var restart = document.getElementById("btn-restart");
 var ball = document.querySelector(".ball");
 var list = document.querySelector(".blocked-sites");
+
 
 var colors = ["#FFFFFF", "#000000", "#FF0000", "#FFFF00", "#0000FF"]
 var values = [1, 1800, 3600, 5400, 7200, 10800, 14400, 18000];
@@ -25,6 +27,7 @@ if (GLOB_BG.timer01.IS_RUNNING) {
 ball.style.backgroundColor = colors[GLOB_BG.COLOR_VALUE];
 document.querySelector(".color-id").innerHTML = colors[GLOB_BG.COLOR_VALUE];
 document.querySelector(".color-id").style.color = colors[GLOB_BG.COLOR_VALUE];
+// document.querySelector(".website-name").innerHTML = getURL;
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
   timer_value.innerHTML = text[this.value];
@@ -53,13 +56,57 @@ restart.addEventListener('click', () => {
 
 })
 
+reset_websites.addEventListener('click', () => {
+  chrome.storage.sync.set({
+    urls: []
+  }, function() {
+    reloadWebsites();
+    chrome.tabs.reload();
+  })
+})
+
 web_button.addEventListener('click', () => {
 
   reloadWebsites();
   document.querySelector(".homepage").style.display = "none";
   document.querySelector(".sitepage").style.display = "inline";
+  getURL();
 
 })
+
+function getURL(){
+  var url =
+  chrome.tabs.query({
+    "active": true,
+    "lastFocusedWindow": true
+  }, function(tabs) {
+
+      var url = changeUrl(tabs[0].url);
+      var image = "<img style='max-width:15%; margin-right:5px;' src='https://icon.horse/icon/" + url + "'>";
+      document.querySelector(".website-name").innerHTML = image + url;
+      // alert("the tab is " + url);
+  })
+
+  // alert("the tab is " + url);
+  // document.querySelector(".website-name").innerText = url;
+}
+
+function changeUrl(url) {
+
+
+  try {
+    const paramUrl = new URL(url);
+    var newUrl = paramUrl.host;
+    // newUrl = "*" + newUrl.substring(newUrl.indexOf(":")) + "*"
+    return newUrl
+  } catch (e) {
+    console.error(e);
+    alert("Bad URL");
+    return null;
+  }
+
+
+}
 
 function removeUrl(url) {
     // alert("removing "+url);
@@ -75,6 +122,7 @@ function removeUrl(url) {
 }
 
 function reloadWebsites(){
+  // document.querySelector(".website-name").innerText = getURL();
   list.innerHTML = "";
   chrome.storage.sync.get(["urls"], function(result) {
 
