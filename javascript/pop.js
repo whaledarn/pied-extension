@@ -10,6 +10,7 @@ var output = document.getElementById("demo");
 var timer_value = document.getElementById("timer");
 var restart = document.getElementById("btn-restart");
 var ball = document.querySelector(".ball");
+var list = document.querySelector(".blocked-sites");
 
 var colors = ["#FFFFFF", "#000000", "#FF0000", "#FFFF00", "#0000FF"]
 var values = [1, 1800, 3600, 5400, 7200, 10800, 14400, 18000];
@@ -53,10 +54,63 @@ restart.addEventListener('click', () => {
 })
 
 web_button.addEventListener('click', () => {
+
+  reloadWebsites();
   document.querySelector(".homepage").style.display = "none";
   document.querySelector(".sitepage").style.display = "inline";
 
 })
+
+function removeUrl(url) {
+    // alert("removing "+url);
+    chrome.storage.sync.get(["urls"], function(result) {
+        let index = result["urls"].indexOf(url)
+        if (index !== -1) {
+            result["urls"].splice(index, 1)
+            chrome.storage.sync.set({urls: result["urls"]}, function() {
+              reloadWebsites();
+            })
+        }
+    })
+}
+
+function reloadWebsites(){
+  list.innerHTML = "";
+  chrome.storage.sync.get(["urls"], function(result) {
+
+    if (result["urls"] == null) {
+      result["urls"] = [];
+    }
+
+    for (var i = 0; i < result["urls"].length; i++) {
+      var image = document.createElement("img");
+      var image = "<img style='max-width:10%; margin-right:5px;' src='https://icon.horse/icon/" + result["urls"][i] + "'>";
+
+      var website_text = document.createElement("a");
+      website_text.classList.add("list-group-item");
+      website_text.classList.add("list-group-item-action");
+      website_text.innerHTML = image + result["urls"][i];
+      // alert(website_text.innerText);
+      // website_text.addEventListener("click", function() {
+      //   removeUrl(website_text.innerText);
+      // });
+      // website_text.appendChild(image);
+
+      // list.appendChild(image);
+      list.appendChild(website_text);
+      // list.appendChild(button);
+    }
+    var button = document.querySelector('.blocked-sites :nth-child(1)');
+    // alert("wtf " + button.innerText);
+    for(var i = 1; i<=result["urls"].length; i++){
+      var button = document.querySelector('.blocked-sites :nth-child('+i+')');
+      button.addEventListener("click", function() {
+        removeUrl(button.innerText);
+        chrome.tabs.reload();
+      });
+    }
+  })
+}
 
 function convertTime(aDur) {
   // this formats minutes and seconds for display
@@ -68,7 +122,7 @@ function convertTime(aDur) {
   var format_min = min < 10 ? "0" + min : min;
   var format_sec = sec < 10 ? "0" + sec : sec;
 
-  return format_hour + "h " + format_min + "m " + format_sec+"s";
+  return format_hour + "h " + format_min + "m " + format_sec + "s";
 
 }
 
@@ -94,6 +148,7 @@ function IntervalUpdate() {
     document.querySelector(".shadow").style.animation = "";
     document.querySelector(".color-id").innerHTML = colors[GLOB_BG.COLOR_VALUE];
     document.querySelector(".color-id").style.color = colors[GLOB_BG.COLOR_VALUE];
+    // reloadWebsites();
   }
 
 }

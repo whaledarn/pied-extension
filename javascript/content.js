@@ -1,7 +1,12 @@
-blocked = ["www.facebook.com", "www.youtube.com", "www.discord.com"];
+var blocked;
 var shouldBlock = false;
 //http://www.google.com/s2/favicons?domain=discord.com
-
+chrome.storage.sync.get(["urls"], function(result) {
+    if(result["urls"] == null)
+      blocked = [];
+    else
+      blocked = result["urls"];
+})
 
 const generateHTML = () => {
   return `
@@ -83,20 +88,23 @@ const generateCSS = () => {
 }
 
 
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    if (request.greeting == "add")
-      alert("adding website");
-  }
-);
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     console.log(sender.tab ?
+//                 "from a content script:" + sender.tab.url :
+//                 "from the extension");
+//     if (request.greeting == "add")
+//       alert("adding website");
+//   }
+// );
 
 chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
   shouldBlock = response.farewell;
   if(shouldBlock){
-    if(blocked.includes(window.location.hostname)){
+    // alert(blocked);
+    // alert(window.location.host);
+
+    if(blocked.includes(window.location.host)){
         document.body.innerHTML = generateHTML();
         document.head.innerHTML = generateCSS();
       }
