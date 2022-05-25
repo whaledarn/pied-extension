@@ -12,9 +12,10 @@ var timer_value = document.getElementById("timer");
 var restart = document.getElementById("btn-restart");
 var ball = document.querySelector(".ball");
 var list = document.querySelector(".blocked-sites");
+var color_list = document.querySelector(".color-list");
 
 
-var colors = ["#FFFFFF", "#000000", "#FF0000", "#FFFF00", "#0000FF"]
+var colors = ["#FFFFFF", "#000000", "#FF0000", "#FFFF00", "#0000FF"];
 var values = [1, 1800, 3600, 5400, 7200, 10800, 14400, 18000];
 var text = ["00h 00m 01s", "00h 30m 00s", "01h 00m 00s", "01h 30m 00s", "02h 00m 00s", "03h 00m 00s", "04h 00m 00s", "05h 00m 00s"];
 
@@ -51,8 +52,6 @@ GLOB_SET_BTN.addEventListener('click', () => {
 
 restart.addEventListener('click', () => {
   resetAll();
-  document.querySelector(".homepage").style.display = "inline";
-  document.querySelector(".sitepage").style.display = "none";
 
 })
 
@@ -74,27 +73,36 @@ web_button.addEventListener('click', () => {
 
 })
 
-function getURL(){
+color_button.addEventListener('click', () => {
+
+  reloadColors();
+  document.querySelector(".homepage").style.display = "none";
+  document.querySelector(".colorpage").style.display = "inline";
+  // getURL();
+
+})
+
+function getURL() {
   var url =
-  chrome.tabs.query({
-    "active": true,
-    "lastFocusedWindow": true
-  }, function(tabs) {
+    chrome.tabs.query({
+      "active": true,
+      "lastFocusedWindow": true
+    }, function(tabs) {
 
       var url = changeUrl(tabs[0].url);
-      var image = "<img style='max-width:15%; margin-right:5px;' src='https://icon.horse/icon/" + url + "'>";
+      var image = "<img style='max-width:13%; margin-right:5px;' src='https://icon.horse/icon/" + url + "'>";
       document.querySelector(".website-name").innerHTML = image + url;
-      if(url.length > 20){
+      if (url.length > 20) {
         document.querySelector(".website-name").style.fontSize = "18px";
       }
-      if(url.length > 40){
+      if (url.length > 40) {
         document.querySelector(".website-name").style.fontSize = "10px";
       }
       // document.querySelector(".website-name").style.maxWidth = "300px";
       // document.querySelector(".website-name").style.display = "block";
       // document.querySelector(".website-name").style.width = "100%";
       // alert("the tab is " + url);
-  })
+    })
 
   // alert("the tab is " + url);
   // document.querySelector(".website-name").innerText = url;
@@ -118,19 +126,21 @@ function changeUrl(url) {
 }
 
 function removeUrl(url) {
-    // alert("removing "+url);
-    chrome.storage.sync.get(["urls"], function(result) {
-        let index = result["urls"].indexOf(url)
-        if (index !== -1) {
-            result["urls"].splice(index, 1)
-            chrome.storage.sync.set({urls: result["urls"]}, function() {
-              reloadWebsites();
-            })
-        }
-    })
+  // alert("removing "+url);
+  chrome.storage.sync.get(["urls"], function(result) {
+    let index = result["urls"].indexOf(url)
+    if (index !== -1) {
+      result["urls"].splice(index, 1)
+      chrome.storage.sync.set({
+        urls: result["urls"]
+      }, function() {
+        reloadWebsites();
+      })
+    }
+  })
 }
 
-function reloadWebsites(){
+function reloadWebsites() {
   // document.querySelector(".website-name").innerText = getURL();
   list.innerHTML = "";
   chrome.storage.sync.get(["urls"], function(result) {
@@ -147,6 +157,16 @@ function reloadWebsites(){
       website_text.classList.add("list-group-item");
       website_text.classList.add("list-group-item-action");
       website_text.innerHTML = image + result["urls"][i];
+
+      website_text.addEventListener("mouseover", function() {
+        website_text.classList.add("list-group-item-danger");
+      });
+      website_text.addEventListener("mouseleave", function() {
+        website_text.classList.remove("list-group-item-danger");
+      });
+
+      website_text.title = "Click to remove";
+
       website_text.onclick = function() {
         alert(website_text.innerText);
         removeUrl(website_text.innerText);
@@ -173,21 +193,91 @@ function reloadWebsites(){
     //     removeUrl(button.innerText);
     //     chrome.tabs.reload();
     //   }
-      // button.addEventListener("mouseover", function() {
-      //   button.classList.add("list-group-item-danger");
-      // });
-      // button.addEventListener("mouseleave", function() {
-      //   button.classList.remove("list-group-item-danger");
-      // });
+    // button.addEventListener("mouseover", function() {
+    //   button.classList.add("list-group-item-danger");
+    // });
+    // button.addEventListener("mouseleave", function() {
+    //   button.classList.remove("list-group-item-danger");
+    // });
 
-      // button.addEventListener("click", function() {
-      //   alert(button.innerText);
-      //   removeUrl(button.innerText);
-      //   chrome.tabs.reload();
-      // });
+    // button.addEventListener("click", function() {
+    //   alert(button.innerText);
+    //   removeUrl(button.innerText);
+    //   chrome.tabs.reload();
+    // });
     // }
   })
 }
+
+function reloadColors() {
+  color_list.innerHTML = "";
+  chrome.storage.sync.get(["colors"], function(result) {
+    var colorMap;
+    if (result["colors"] == null) {
+      colorMap = new Map();
+    } else {
+      alert(JSON.parse(result["colors"]));
+      colorMap = new Map(JSON.parse(result["colors"]));
+    }
+
+    for (const [key, value] of colorMap.entries()) {
+
+      // alert("key is " + key);
+      let color_row = document.createElement("div");
+      color_row.classList.add("row");
+
+      let color_check = document.createElement("input");
+      color_check.classList.add("color-check");
+      color_check.type = "checkbox";
+
+      let color_ball = document.createElement("div");
+      // color_ball.classList.add("list-group-item");
+      color_ball.classList.add("col");
+      color_ball.classList.add("color-ball");
+      color_ball.style.backgroundColor = key;
+
+
+      let color_text = document.createElement("p");
+      color_text.classList.add("color-text");
+      color_text.classList.add("col");
+      color_text.innerHTML = key;
+
+      let color_value = document.createElement("h3");
+      color_value.classList.add("color-value-text");
+      color_value.innerText = value;
+
+      color_row.appendChild(color_check);
+      color_row.appendChild(color_ball);
+      color_row.appendChild(color_text);
+        color_row.appendChild(color_value);
+      // website_text.classList.add("list-group-item-action");
+
+
+      // website_text.title="Click to remove";
+      //
+      // website_text.onclick = function() {
+      //   alert(website_text.innerText);
+      //   removeUrl(website_text.innerText);
+      //   chrome.tabs.reload();
+      // }
+      // website_text.style.maxWidth = "300px";
+
+      // alert(website_text.innerText);
+      // website_text.addEventListener("click", function() {
+      //   removeUrl(website_text.innerText);
+      // });
+      // website_text.appendChild(image);
+
+      // list.appendChild(image);
+      // color_list.appendChild(website_text);
+      color_list.appendChild(color_row);
+      color_list.appendChild(document.createElement("hr"));
+      // list.appendChild(button);
+    }
+
+  })
+}
+
 
 function convertTime(aDur) {
   // this formats minutes and seconds for display

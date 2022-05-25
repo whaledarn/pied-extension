@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500&display=swap');
 
-body{
+body {
   font-family: 'Baloo Da 2', "Verdana", sans-serif;
 }
 
@@ -10,28 +10,28 @@ body{
   text-align: center;
 }
 
-#btn-start{
+#btn-start {
   margin: auto;
 }
 
-#btn-restart{
+#btn-restart {
   margin: auto;
 }
 
 .custom-button {
-    width: 120px !important;
+  width: 120px !important;
 }
 
-.website-name{
+.website-name {
   font-size: 22px;
 }
 
-.navbar{
-  margin-bottom:20px;
-
+.navbar {
+  margin-bottom: 20px;
 }
+
 .name {
-  margin-left:5px;
+  margin-left: 5px;
 }
 
 .hometop {
@@ -40,18 +40,22 @@ body{
   text-align: center;
 }
 
-.unstarted{
+.unstarted {
   display: none;
 }
 
-.started{
-}
+.started {}
 
 .title {
   text-align: center;
 }
 
 .sitepage {
+  display: none;
+  max-width: 300px;
+}
+
+.colorpage {
   display: none;
   max-width: 300px;
 }
@@ -95,7 +99,6 @@ body{
   border-radius: 50%;
   background: #04AA6D;
   cursor: pointer;
-
 }
 
 .slider::-moz-range-thumb {
@@ -138,6 +141,42 @@ body{
   /* animation: bounce 1s infinite; */
 }
 
+.color-ball {
+  background-color: #ff1a66;
+  /* background-color: rgb(49, 145, 231); */
+  box-shadow: inset -25px -15px 40px rgba(0, 0, 0, .3);
+  background-image: linear-gradient(-45deg, rgba(255, 255, 220, .3) 0%, transparent 100%);
+  height: 50px;
+  width: 50px;
+  max-width: 50px;
+  border-radius: 50%;
+  text-align: center;
+  margin: auto;
+  margin-left: 50px;
+}
+
+.color-row {
+  margin-top:5px;
+  margin-bottom:5px;
+}
+
+.color-check{
+  margin: auto;
+}
+
+.color-text{
+  position: relative;
+  margin: auto;
+  text-align:center;
+}
+
+.color-value-text{
+  position: relative;
+  margin: auto;
+  margin-right: 50px;
+  text-align:center;
+}
+
 .color-id {
   /* position: relative; */
   /* top: 150px; */
@@ -145,13 +184,17 @@ body{
   text-align: right;
   margin: auto;
   /* margin-top:20px; */
-  margin-right:10px;
+  margin-right: 10px;
   text-shadow: 2px 2px 4px #000000;
-
 }
 
-.shadow{
-  background-color: rgba(8,8,8,0.05);
+.mashed-color{
+  background-color: rgba(8, 8, 8, 0.05);
+  height: 50px;
+}
+
+.shadow {
+  background-color: rgba(8, 8, 8, 0.05);
   /* background-color: black; */
   height: 10px;
   width: 65px;
@@ -191,17 +234,28 @@ body{
 }
 
 @keyframes shrink {
-  50%{
+  50% {
     transform: scaleX(0.5);
   }
 }
 
 /*SITES CSS*/
-.blocked-sites{
+.blocked-sites {
   overflow-y: auto;
   height: 260px;
   /* list-style: none; */
   margin-left: 0;
   margin-top: 20px;
   max-width: 300px;
+  overflow-x: hidden;
+}
+
+.color-list {
+  overflow-y: auto;
+  height: 260px;
+  /* list-style: none; */
+  margin-left: 10px;
+  margin-top: 20px;
+  max-width: 300px;
+  overflow-x: hidden;
 }

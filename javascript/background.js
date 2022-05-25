@@ -1,4 +1,5 @@
 COLOR_VALUE = Math.floor(Math.random()*5);
+var colors = ["#FFFFFF", "#000000", "#FF0000", "#FFFF00", "#0000FF"];
 class Timer {
   constructor() {
     this.DURATION = 60;
@@ -52,6 +53,7 @@ class Timer {
         this.decrementTime();
 
       } else {
+        addColor(colors[COLOR_VALUE]);
         COLOR_VALUE = Math.floor(Math.random()*5);
         this.IS_DONE = true;
         // chrome.tabs.query({
@@ -63,6 +65,7 @@ class Timer {
         //   }, function(response) {
         //   });
         // });
+
         alert("FINISHED!");
         resetAll();
       }
@@ -89,6 +92,36 @@ class Timer {
   }
 
 
+}
+
+
+function addColor(c){
+  alert("adding color "+c);
+  chrome.storage.sync.get(["colors"], function(result) {
+    var colorMap;
+    if (result["colors"] == null) {
+      colorMap = new Map();
+    }
+    else{
+      alert(JSON.parse(result["colors"]));
+      colorMap = new Map(JSON.parse(result["colors"]));
+    }
+    // colorMap = new Map();
+    alert(colorMap);
+
+
+    if(colorMap.has(c)){
+      colorMap.set(c,colorMap.get(c)+1);
+    }
+    else{
+      colorMap.set(c,1);
+    }
+    chrome.storage.sync.set({
+      colors: JSON.stringify(Array.from(colorMap.entries()))
+    }, function() {
+    })
+    alert(colorMap.toString());
+  })
 }
 
 function resetAll() {

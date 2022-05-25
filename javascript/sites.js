@@ -1,4 +1,4 @@
-var return_button = document.getElementById('return');
+var return_button_websites = document.querySelector('.return-websites');
 var submit = document.getElementById('submit');
 // var website = document.getElementById('website-entry');
 
@@ -38,11 +38,7 @@ submit.addEventListener('click', () => {
 
 
 
-
-
-
-
-return_button.addEventListener('click', () => {
+return_button_websites.addEventListener('click', () => {
   document.querySelector(".homepage").style.display = "inline";
   document.querySelector(".sitepage").style.display = "none";
 })
