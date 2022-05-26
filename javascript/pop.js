@@ -71,8 +71,6 @@ color_button.addEventListener('click', () => {
   reloadColors();
   document.querySelector(".homepage").style.display = "none";
   document.querySelector(".colorpage").style.display = "inline";
-  // getURL();
-
 })
 
 
@@ -123,7 +121,7 @@ function IntervalUpdate() {
 /*Reset Timer*/
 function resetAll() {
 
-  document.getElementById('timer').innerText = "00h 00m 00s";
+  document.getElementById('timer').innerText = "02h 00m 00s";
   GLOB_BG.resetAll();
 }
 

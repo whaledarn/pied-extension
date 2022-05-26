@@ -4,8 +4,6 @@ var list = document.querySelector(".blocked-sites"); // list of blocked sites
 
 /*Button Event Listeners*/
 submit.addEventListener('click', () => {
-
-  // alert("adding website " + website.value);
   chrome.tabs.query({
     "active": true,
     "lastFocusedWindow": true
@@ -14,10 +12,6 @@ submit.addEventListener('click', () => {
     chrome.storage.sync.get(["urls"], function(result) {
       if (result["urls"] == null)
         result["urls"] = [];
-      // alert(validateUrl(website.value));
-      // url_to_add = changeUrl(tabs[0]);
-      // alert(url_to_add);
-
       newUrl = changeUrl(tabs[0].url);
       if (newUrl != null && !result["urls"].includes(newUrl))
         result["urls"].push(newUrl);
@@ -116,7 +110,7 @@ function reloadWebsites() {
       website_text.title = "Click to remove";
 
       website_text.onclick = function() {
-        alert(website_text.innerText);
+        alert("Unblock "+website_text.innerText+"?");
         removeUrl(website_text.innerText);
         chrome.tabs.reload();
       }
