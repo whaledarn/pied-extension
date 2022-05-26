@@ -1,84 +1,138 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500&display=swap');
 
+/*BODY*/
 body {
   font-family: 'Baloo Da 2', "Verdana", sans-serif;
 }
 
+/*IDS*/
 #timer {
   margin-top: 15px;
   margin-bottom: 15px;
   text-align: center;
 }
-
 #btn-start {
   margin: auto;
 }
-
 #btn-restart {
   margin: auto;
 }
 
+/*HOMEPAGE CSS*/
 .custom-button {
   width: 120px !important;
 }
-
 .website-name {
   font-size: 22px;
 }
-
 .navbar {
   margin-bottom: 20px;
 }
-
 .name {
   margin-left: 5px;
 }
-
 .hometop {
   width: 250px;
   /* margin: auto; */
   text-align: center;
 }
-
 .unstarted {
   display: none;
 }
-
-.started {}
-
 .title {
   text-align: center;
 }
 
+/*SITES CSS*/
 .sitepage {
   display: none;
   max-width: 300px;
 }
-
-.colorpage {
-  display: none;
+.blocked-sites {
+  overflow-y: auto;
+  height: 260px;
+  /* list-style: none; */
+  margin-left: 0;
+  margin-top: 20px;
   max-width: 300px;
+  overflow-x: hidden;
 }
-
 .options {
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
 }
 
+/*COLOR CSS*/
+.colorpage {
+  display: none;
+  max-width: 300px;
+}
+.color-list {
+  overflow-y: auto;
+  height: 260px;
+  /* list-style: none; */
+  margin-left: 10px;
+  margin-top: 20px;
+  max-width: 300px;
+  overflow-x: hidden;
+}
+.color-ball {
+  background-color: #ff1a66;
+  box-shadow: inset -25px -15px 40px rgba(0, 0, 0, .3);
+  background-image: linear-gradient(-45deg, rgba(255, 255, 220, .3) 0%, transparent 100%);
+  height: 50px;
+  width: 50px;
+  max-width: 50px;
+  border-radius: 50%;
+  text-align: center;
+  margin: auto;
+  margin-left: 50px;
+}
+.color-row {
+  margin-top:5px;
+  margin-bottom:5px;
+}
+.color-check{
+  margin: auto;
+}
+.color-text{
+  position: relative;
+  margin: auto;
+  text-align:center;
+}
+.color-value-text{
+  position: relative;
+  margin: auto;
+  margin-right: 50px;
+  text-align:center;
+}
+.color-id {
+  text-align: right;
+  margin: auto;
+  margin-right: 10px;
+  text-shadow: 2px 2px 4px #000000;
+}
+.mashed-color{
+  background-color: rgba(8, 8, 8, 0.05);
+  height: 30px;
+  width: 100px;
+  margin-right:0;
+  margin-left: 70px;
+}
+
+
+/*Slider*/
 .slidecontainer {
   margin: auto;
   margin-top: 20px;
   width: 100%;
   /* Width of the outside container */
 }
-
-/* Mouse-over effects */
 .slider:hover {
   opacity: 1;
   /* Fully shown on mouse-over */
 }
-
 .slider {
   -webkit-appearance: none;
   width: 100%;
@@ -90,7 +144,6 @@ body {
   -webkit-transition: .2s;
   transition: opacity .2s;
 }
-
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -100,7 +153,6 @@ body {
   background: #04AA6D;
   cursor: pointer;
 }
-
 .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
@@ -109,7 +161,7 @@ body {
   cursor: pointer;
 }
 
-/*bouncing item*/
+/*Bouncing Ball*/
 .mycanvas {
   background-color: #EDEDED;
   /* background: linear-gradient(to right, #EDEDED,  whitesmoke,  #EDEDED); */
@@ -123,10 +175,8 @@ body {
   top: 0;
   bottom: 0;
 }
-
 .ball {
   background-color: #ff1a66;
-  /* background-color: rgb(49, 145, 231); */
   box-shadow: inset -25px -15px 40px rgba(0, 0, 0, .3);
   background-image: linear-gradient(-45deg, rgba(255, 255, 220, .3) 0%, transparent 100%);
   height: 50px;
@@ -140,62 +190,8 @@ body {
   z-index: 1;
   /* animation: bounce 1s infinite; */
 }
-
-.color-ball {
-  background-color: #ff1a66;
-  /* background-color: rgb(49, 145, 231); */
-  box-shadow: inset -25px -15px 40px rgba(0, 0, 0, .3);
-  background-image: linear-gradient(-45deg, rgba(255, 255, 220, .3) 0%, transparent 100%);
-  height: 50px;
-  width: 50px;
-  max-width: 50px;
-  border-radius: 50%;
-  text-align: center;
-  margin: auto;
-  margin-left: 50px;
-}
-
-.color-row {
-  margin-top:5px;
-  margin-bottom:5px;
-}
-
-.color-check{
-  margin: auto;
-}
-
-.color-text{
-  position: relative;
-  margin: auto;
-  text-align:center;
-}
-
-.color-value-text{
-  position: relative;
-  margin: auto;
-  margin-right: 50px;
-  text-align:center;
-}
-
-.color-id {
-  /* position: relative; */
-  /* top: 150px; */
-  /* left: 0px; */
-  text-align: right;
-  margin: auto;
-  /* margin-top:20px; */
-  margin-right: 10px;
-  text-shadow: 2px 2px 4px #000000;
-}
-
-.mashed-color{
-  background-color: rgba(8, 8, 8, 0.05);
-  height: 50px;
-}
-
 .shadow {
   background-color: rgba(8, 8, 8, 0.05);
-  /* background-color: black; */
   height: 10px;
   width: 65px;
   border-radius: 50%;
@@ -203,9 +199,7 @@ body {
   top: 150px;
   left: 103px;
   z-index: 0.5;
-  /* animation: shrink 1s infinite; */
 }
-
 @keyframes bounce {
   10% {
     height: 50px;
@@ -232,30 +226,8 @@ body {
     transform: translateY(0px);
   }
 }
-
 @keyframes shrink {
   50% {
     transform: scaleX(0.5);
   }
-}
-
-/*SITES CSS*/
-.blocked-sites {
-  overflow-y: auto;
-  height: 260px;
-  /* list-style: none; */
-  margin-left: 0;
-  margin-top: 20px;
-  max-width: 300px;
-  overflow-x: hidden;
-}
-
-.color-list {
-  overflow-y: auto;
-  height: 260px;
-  /* list-style: none; */
-  margin-left: 10px;
-  margin-top: 20px;
-  max-width: 300px;
-  overflow-x: hidden;
 }

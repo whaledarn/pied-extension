@@ -1,5 +1,6 @@
-COLOR_VALUE = Math.floor(Math.random()*5);
-var colors = ["#FFFFFF", "#000000", "#FF0000", "#FFFF00", "#0000FF"];
+COLOR_VALUE = Math.floor(Math.random()*8); // GLOBAL VALUE to determine color #
+var colors = ["#FFFFFF", "#000000", "#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#9400D3"]; // determines color of current ball
+
 class Timer {
   constructor() {
     this.DURATION = 60;
@@ -28,20 +29,9 @@ class Timer {
     return this.IS_DONE;
   }
   startTimer() {
-    // chrome.tabs.query({
-    //   active: true,
-    //   currentWindow: true
-    // }, function(tabs) {
-    //   chrome.tabs.sendMessage(tabs[0].id, {
-    //     greeting: "block"
-    //   }, function(response) {
-    //   });
-    // });
 
     this.CUR_DURATION = this.DURATION;
     this.IS_RUNNING = true;
-    // COLOR_VALUE = 2;
-    // alert("changed color to ");
 
     this.TIMING_INTERVAL = setInterval(this.intervalCheck.bind(this), 1000)
   }
@@ -54,18 +44,8 @@ class Timer {
 
       } else {
         addColor(colors[COLOR_VALUE]);
-        COLOR_VALUE = Math.floor(Math.random()*5);
+        COLOR_VALUE = Math.floor(Math.random()*8);
         this.IS_DONE = true;
-        // chrome.tabs.query({
-        //   active: true,
-        //   currentWindow: true
-        // }, function(tabs) {
-        //   chrome.tabs.sendMessage(tabs[0].id, {
-        //     greeting: "unblock"
-        //   }, function(response) {
-        //   });
-        // });
-
         alert("FINISHED!");
         resetAll();
       }
@@ -86,29 +66,18 @@ class Timer {
   setDone(aBool) {
     this.IS_DONE = aBool;
   }
-
-  toString() {
-    return "hello";
-  }
-
-
 }
 
-
+/*Adds color after timer is complete*/
 function addColor(c){
-  alert("adding color "+c);
   chrome.storage.sync.get(["colors"], function(result) {
     var colorMap;
     if (result["colors"] == null) {
       colorMap = new Map();
     }
     else{
-      alert(JSON.parse(result["colors"]));
       colorMap = new Map(JSON.parse(result["colors"]));
     }
-    // colorMap = new Map();
-    alert(colorMap);
-
 
     if(colorMap.has(c)){
       colorMap.set(c,colorMap.get(c)+1);
@@ -120,16 +89,16 @@ function addColor(c){
       colors: JSON.stringify(Array.from(colorMap.entries()))
     }, function() {
     })
-    alert(colorMap.toString());
   })
 }
 
+/*reset timer*/
 function resetAll() {
     timer01.clear();
   timer01 = new Timer();
 }
 
-
+/*add listener to determine if timer is running*/
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(sender.tab ?
@@ -141,9 +110,6 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
+
+//create timer
 var timer01 = new Timer();
-
-
-
-
-var boxes = [1, 2, 3, 4];

@@ -1,8 +1,6 @@
-// var blocked;
-var shouldBlock = false;
-//http://www.google.com/s2/favicons?domain=discord.com
+var shouldBlock = false; // is timer running?
 
-
+/*Code for HTML page*/
 const generateHTML = () => {
   return `
   <div class="container">
@@ -17,7 +15,7 @@ const generateHTML = () => {
   `;
 }
 
-
+/*Code for CSS page*/
 const generateCSS = () => {
   return `
   <style>
@@ -83,33 +81,18 @@ const generateCSS = () => {
 }
 
 
-// chrome.runtime.onMessage.addListener(
-//   function(request, sender, sendResponse) {
-//     console.log(sender.tab ?
-//                 "from a content script:" + sender.tab.url :
-//                 "from the extension");
-//     if (request.greeting == "add")
-//       alert("adding website");
-//   }
-// );
-
+/*Check if should block*/
 chrome.runtime.sendMessage({
   greeting: "hello"
 }, function(response) {
   shouldBlock = response.farewell;
-  // alert(shouldBlock);
-
   chrome.storage.sync.get(["urls"], function(result) {
-    // alert("getting urls");
     if (result["urls"] == null)
       var blocked = [];
     else
       var blocked = result["urls"];
 
     if (shouldBlock) {
-      // alert(blocked);
-      // alert(window.location.host);
-
       if (blocked.includes(window.location.host)) {
         document.body.innerHTML = generateHTML();
         document.head.innerHTML = generateCSS();
@@ -118,17 +101,3 @@ chrome.runtime.sendMessage({
   })
 
 });
-
-
-
-// chrome.runtime.onMessage.addListener(gotMessage);
-//
-// function gotMessage(request, sender, response) {
-//   alert("here");
-//   if(request.greeting == "block")
-//     shouldBlock = true;
-//   if (request.greeting === "unblock")
-//     shouldBlock = false;
-// }
-
-// alert(shouldBlock);
